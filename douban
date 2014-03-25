@@ -1,2 +1,2 @@
 #!/bin/sh
-chromium-browser douban.fm &
+chromium-browser douban.fm & > /dev/null
