@@ -1,16 +1,58 @@
 #!/bin/bash
 
-if [ -z "$1" ];then
+function help()
+{
+	echo ""
+	echo -e "  init-git [-i <remote-ip-address>] \c"
+	echo -e "[-u <user-name>] [-e <your-email-address>]\c"
+	echo "-n <remote-repo-name> "
+	echo "  Default: <remote-ip-address> is 192.168.135.14"
+	echo "  Default: <user-name> is `hostname`"
+	echo "  Example: init-git -i 192.168.135.14 -u `hostname` -n REPO_NAME"
+	echo ""
+}
+
+while getopts "i:u:n:e:h" arg
+do
+	case $arg in
+		i)
+			IP=$OPTARG
+			;;
+		u)
+			USER=$OPTARG
+			;;
+		n)
+			NAME=$OPTARG
+			;;
+		e)
+			EMAIL=$OPTARG
+			;;
+		?)
+			help
+			;;
+	esac
+done
+
+if [ -z "$NAME" ];then
 	echo ""
 	echo "  Please tell me the name of remote repository name"
-	echo ""
+	help
 	exit
+fi
+if [ -z "$IP" ];then
+	IP="192.168.135.14"
+fi
+if [ -z "$USER" ];then
+	USER=`hostname`
+fi
+if [[ $USER = [Aa]ndy ]]&&[ -z "$EMAIL" ];then
+	EMAIL=Andy.at.working@gmail.com
 fi
 
 a=`find . -name .git`
 
 if [ -n "$a" ];then
-	# There is .git/ in current directory
+	 There is .git/ in current directory
 	echo "  I find you have initialize your repository."
 	echo "  Do you want to remove .git/ and create a new one?(yes/NO)"
 	read answer
@@ -22,36 +64,36 @@ if [ -n "$a" ];then
 fi
 
 git init
-git config --global user.name Andy
-git config --global user.email Andy.at.working@gmail.com
+git config --global user.name $USER
+git config --global user.email $EMAIL
 git add .
 git commit -m 'init'
-git remote add local ssh://Andy@192.168.135.14/volume1/git_repos/Andy/$1
+git remote add local ssh://$USER@$IP/volume1/git_repos/$USER/$NAME
 while true;
 do
 	git push local master
 	b=`echo "$?"`
 	echo "$b"
 	if [ "$b" -eq "0" ];then
-		# Push successfully.
+		 Push successfully.
 		echo ""
 		echo "  Congratulations, initialize git repository successfully."
 		echo ""
 		exit
 	elif [ "$b" -eq "1" ];then
-		# Maybe this is a problem about merge.
-		# You can try to pull first and then push.
+		 Maybe this is a problem about merge.
+		 You can try to pull first and then push.
 		echo ""
 		echo "  There was something wrong when you push your code."
 		echo "  Maybe we need to pull the code from remote repository first"
 		echo "  Do you want to pull the code?(yes/NO)"
 		read answer
 		if [[ $answer = [Yy][Ee][Ss] || $answer = [Yy] ]];then
-			# You choose pull the code.
+			 You choose pull the code.
 			git pull local master
 			c=`echo "$?"`
 			if [ "$c" -ne "0" ];then
-				# Pull failed.
+				 Pull failed.
 				echo ""
 				echo "  There was something wrong when you pull your code."
 				echo "  Do you need to remove .git/ and exit?(yes/NO)"
@@ -61,10 +103,10 @@ do
 				fi
 				exit
 			fi
-			# Pull successfully and try to push again.
+			 Pull successfully and try to push again.
 		else
-			# You don't want to pull, and I don't know what I can do.
-			# So game over.
+			 You don't want to pull, and I don't know what I can do.
+			 So game over.
 			echo ""
 			echo "  Do you need to remove .git/ and exit?(yes/NO)"
 			read answer
@@ -74,7 +116,7 @@ do
 			exit
 		fi
 	else
-		# I don't know what's wrong about this push, so game over.
+		 I don't know what's wrong about this push, so game over.
 		echo ""
 		echo "  There was something wrong when you push your code."
 		echo "  Do you need to remove .git/ and exit?(yes/NO)"
