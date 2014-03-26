@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 data="$@"
-chromium-browser www.baidu.com/#wd="${data}" > /dev/null &
+chromium-browser www.baidu.com/#wd="${data}" 1> /dev/null 2> /dev/null &
