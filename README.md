@@ -1,4 +1,4 @@
-Terry
+Teddy
 ===
 ---
 
