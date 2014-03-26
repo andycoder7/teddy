@@ -4,7 +4,7 @@ function help()
 {
 	echo ""
 	echo -e "  init-git [-i <remote-ip-address>] \c"
-	echo -e "[-u <user-name>] [-e <your-email-address>]\c"
+	echo -e "[-u <user-name>] [-e <your-email-address>] \c"
 	echo "-n <remote-repo-name> "
 	echo "  Default: <remote-ip-address> is 192.168.135.14"
 	echo "  Default: <user-name> is `hostname`"
