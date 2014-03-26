@@ -2,6 +2,9 @@ My Shell
 ===
 ---
 
+###NAME
+> teddy - which is my bash script, like my teddy bear, just for fun and convenience.
+
 ###DESCRIPTION
 > They are my usual action, so I write these simple shell for convenience.
 
