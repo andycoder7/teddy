@@ -1,0 +1,40 @@
+#!/bin/bash
+#Name:		wg
+#Usage:		login and logout suda wg
+#author:	iaalm (iaalmsimon@gmail.com)
+#version:	2.1
+#Date：		Oct 10 2013
+
+data=$(curl -s wg.suda.edu.cn)
+echo $data | grep '频繁'
+if [ $? -eq 0 ]
+then
+exit 1
+fi
+if [ $? -eq 0 ]
+then
+t=`echo $data | grep -oP '(?<=<input type="hidden" name="__EVENTTARGET" id="__VIEWSTATE" value=")[^"]*(?=")'`
+a=`echo $data | grep -oP '(?<=<input type="hidden" name="__EVENTARGUMENT" id="__VIEWSTATE" value=")[^"]*(?=")'`
+s=`echo $data | grep -oP '(?<=<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value=")[^"]*(?=")'`
+e=`echo $data | grep -oP '(?<=<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value=")[^"]*(?=")'`
+if [ "$1" == "" ]
+then
+result=$(curl -s wg.suda.edu.cn/indexn.aspx --data-urlencode __EVENTTARGET=$t --data-urlencode __EVENTARGUMENT=$a --data-urlencode __VIEWSTATE=$s --data-urlencode TextBox1=$1 --data-urlencode TextBox2=$2 --data-urlencode nw=RadioButton1 --data-urlencode tm=RadioButton6 --data-urlencode Button4=退出网关 --data-urlencode __EVENTVALIDATION=$e )
+else
+result=$(curl -s wg.suda.edu.cn/indexn.aspx --data-urlencode __EVENTTARGET=$t --data-urlencode __EVENTARGUMENT=$a --data-urlencode __VIEWSTATE=$s --data-urlencode TextBox1=$1 --data-urlencode TextBox2=$2 --data-urlencode nw=RadioButton1 --data-urlencode tm=RadioButton6 --data-urlencode Button1=登录网关 --data-urlencode __EVENTVALIDATION=$e )
+fi
+return=$(echo $result | grep -oP '(?<=<span id="Label1"><b><font color="Red" size="6">)[^<]*(?=</font></b></span>)' )
+if [ "$return" == "" ]
+then
+echo $result | grep -o '您' > /dev/null
+if [ $? -eq 1 ]
+then
+return="未知错误"
+else
+return="登陆成功！"
+fi
+fi
+echo $return
+else
+echo "网络错误"
+fi

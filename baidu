@@ -1,3 +1,11 @@
 #!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      baidu
+# Usage:     在终端中调用chrome直接百度，参数是要百度的内容
+#            因为只是方便自己用的，所以没有做浏览器检查什么的
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Apr 8 2014
+
 data="$@"
 chromium-browser www.baidu.com/#wd="${data}" 1> /dev/null 2> /dev/null &

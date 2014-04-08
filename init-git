@@ -1,4 +1,14 @@
 #!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      init-git
+# Usage:     本来我有个本地git服务器的，每次初始化一个仓库都要做一些重复
+#            工作，于是就想直接一键初始化、添加远端仓库、提交、推送什么的。
+#            但是后来发现使用频率不高（我没那多项目要开。。）又不忍删去。
+#            放在这里只是留做纪念。。。
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Apr 8 2014
+
 
 function help()
 {

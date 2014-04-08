@@ -1,2 +1,10 @@
 #!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      douban
+# Usage:     个人比较喜欢douban.fm，但每次都要开机都要开chrome输入豆瓣
+#            网址什么的太烦了，直接写了一个脚本放在/usr/bin/下了
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Apr 8 2014
+
 chromium-browser douban.fm 1> /dev/null 2> /dev/null &
