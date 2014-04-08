@@ -3,10 +3,11 @@ Teddy
 ---
 
 ###NAME
-> teddy - which is my bash script, like my teddy bear, just for fun and convenience.
+> teddy - 玩具泰迪熊
 
 ###DESCRIPTION
-> They are my usual action, so I write these simple shell for convenience.
+> 这里都是一些简单的bash脚本，它们都是我just for fun的产品。这些脚本大多是用来
+> 方便我使用Linux的，由于只是个人使用，所以很多检查什么的都没有做，sorry...
 
 
 ###USEAGE
@@ -17,6 +18,3 @@ Teddy
 > `sudo cp baidu /usr/bin/`<br>
 > `baidu hello world`
 
-###COMMENT
-> init-git: I find I don't need it after I have written. It had been 2 o'clock.
- So I still decided to add it into my git repository for memory.
