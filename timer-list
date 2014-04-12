@@ -1,0 +1,10 @@
+#!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      timer-list
+# Usage:     查看目前已经开的timer列表
+# Example:   timer-list
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Apr 12 2014
+
+ps aux|grep /usr/bin/timer|awk '$NF>0{print $9 " \t"  $12 " \t" $NF}'
