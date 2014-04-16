@@ -27,9 +27,9 @@ colo torte              "设置配色方案
 
 "字体设置
 if has("win32") || has("win64")
-   set guifont=FZShuTi :h10:cDEFAUL
+	set guifont=FZShuTi :h10:cDEFAUL
 else
-   set guifont=FreeMono\ 15
+	set guifont=FreeMono\ 15
 endif
 set ambiwidth=double
 set nu                        "设置行号
@@ -113,18 +113,14 @@ endfun
 "endfun
 map <F6> :TlistToggle<cr>
 
-map <F7> :call MakeGdb()<cr>
-func! MakeGdb()
-	exec "w"
-	exec "!gcc %<.c -g"
-	exec "!sudo gdb a.out"
-endfun
-
-map <F8> :call DoMake()<cr>
-func! DoMake()
+map <F9> :call TempUse()<cr>
+func! TempUse()
 	exec "w"
 	exec "!make clean"
 	exec "!make"
+	"   exec "!python %<.py"
+	"	exec "!agcc.pl %<.c -I'/home/andy/project/zhongyi_gemini/NDK/android-ndk-r4b/build/platforms/android-8/arch-arm/usr/include/netinet/' -o gemini"
+	"	exec "!adb push gemini /data/extern_c/gemini"
 endfun
 
 " 取消高亮
@@ -152,6 +148,7 @@ endfun
 "双击'm'使用pandoc把markdown文件转成html，再用chrome查看"
 map <silent> mm :call ShowMarkdown()<cr>
 func! ShowMarkdown()
+	exec "w"
 	if expand("%:e") == "md"
 		exec "!pandoc %<.md -o .temp.html -c ~/.config/myconfig/pandoc/md.css --strict"
 		exec "!chromium-browser .temp.html"
@@ -164,18 +161,20 @@ if expand("%:e") == "c" || expand("%:e") == "cpp"
 	inoremap #I #include <ESC>i 
 endif
 
-" 高亮显示一行中超过80个字符的部分
-highlight OverLength guibg=#592929
-match OverLength /\%81v.\+/
-:set colorcolumn=81
+" 如果不是markdown文件或者txt文件的话，高亮显示一行中超过80个字符的部分
+if expand("%:e") != "md" && expand("%:e") != "txt"
+	highlight OverLength guibg=#592929
+	match OverLength /\%81v.\+/
+	:set colorcolumn=81
+endif
 
 " 设置命令行高度为2行
 set cmdheight=1
 
 " 用浅色高亮当前行
 if has("gui_running")
-    autocmd InsertLeave * se nocul
-    autocmd InsertEnter * se cul
+	autocmd InsertLeave * se nocul
+	autocmd InsertEnter * se cul
 endif
 
 " 修正自动C式样注释功能 <2005/07/16>
