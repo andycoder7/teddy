@@ -8,7 +8,7 @@
 "            apt-get install chromium-browser
 "            
 "            taglist功能: 先安装ctags，然后加入taglist插件，可以参考这个博客: 
-"            http://sourceforge.net/projects/vim-taglist/files/vim-taglist/
+"			 http://easwy.com/blog/archives/advanced-vim-skills-taglist-plugin/
 "
 "            我当时安装时使用到的一些文件都放在'files_you_may_need'文件夹中了
 
