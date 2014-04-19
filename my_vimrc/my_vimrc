@@ -150,7 +150,8 @@ map <silent> mm :call ShowMarkdown()<cr>
 func! ShowMarkdown()
 	exec "w"
 	if expand("%:e") == "md"
-		exec "!pandoc %<.md -o .temp.html -c ~/.config/myconfig/pandoc/md.css --strict"
+"		pandoc v1.12.2.1 不支持--strict 但是支持markdown_strict
+		exec "!pandoc -f markdown_strict %<.md -o .temp.html -c ~/.config/myconfig/pandoc/md.css"
 		exec "!chromium-browser .temp.html"
 		exec "!rm .temp.html"
 	endif

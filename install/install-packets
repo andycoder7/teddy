@@ -1,0 +1,32 @@
+#!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      install-packets
+# Usage:     重装完系统之后,虽然home分区有单独挂载,但是软件该重装的还是要重装的
+# Example:   ./install-packets
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Apr 19 2014
+# Comment:   在运行之前请先更改软件源为中科大,没有什么原因,只是个人习惯 =.=
+#            为了防止误操作,所以文件没有执行权限
+#            terminator和字典的配置文件都备份本文件夹下了
+#            flash-plugin : https://wiki.ubuntu.com/Chromium/Getting-Flash
+
+sudo apt-get update 
+sudo apt-get upgrade 
+# for my terminal
+sudo apt-get install terminator
+# for chrome
+sudo apt-get install chromium-browser
+# for dict
+sudo apt-get install sdcv
+# for using vi
+sudo apt-get install vim
+# for coding C
+sudo apt-get install ctags
+# for markdown to html
+sudo apt-get install pandoc
+# for github
+sudo apt-get install git
+# for goagent
+sudo apt-get install python-dev python-greenlet python-gevent python-vte python-openssl python-crypto python-appindicator
+sudo apt-get install python-dev python-pip && sudo pip install gevent --upgrade
