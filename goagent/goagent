@@ -1,0 +1,36 @@
+#!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      goagent
+# Usage:     自动切到local的目录,后台执行goagent
+# Example:   goagent
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Apr 19 2014
+# Install:   具体可参考https://code.google.com/p/goagent/wiki/GoAgent_Linux
+#
+#              安装gevent需要pip,安装pip需要一些依赖包
+#            sudo apt-get install python-dev python-greenlet python-gevent
+#            python-vte python-openssl python-crypto python-appindicator
+#              再安装pip
+#            sudo apt-get install python-dev python-pip 
+#              再安装gevent
+#            sudo pip install gevent --upgrade
+#              下载goagent
+#            链接是: https://nodeload.github.com/goagent/goagent/legacy.zip/3.0
+#              unzip解压,然后在sever目录下
+#            python uploader.zip
+#              输入你的appid,gmail,密码,如果开了两步验证的话就是你的应用密码
+#            appid的申请可以参考这个链接: http://www.douban.com/note/262773856/
+#            Google App Engine的链接是: https://appengine.google.com
+#            应用密码设置在:https://www.google.com/settings/personalinfo 
+#                -> 安全性 -> 应用专用密码 -> 登录 -> 然后就不用我教了吧~
+#            然后修改local文件夹下的proxy.ini,把appid改成你的appid
+#
+#               浏览器的相应设置:
+#            可参考该链接:https://code.google.com/p/goagent/wiki/InstallGuide#附：浏览器设置方法
+#               chrome的话:
+#            Proxy Switchy Sharp组件 -> Import/Export -> Restore from File -> 
+#            选择local文件夹下的SwitchyOptions.bak
+
+cd ~/project/teddy/goagent/goagent-goagent-45314ff/'local'
+sudo python proxy.py 1> /dev/null 2> /dev/null &
