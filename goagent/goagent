@@ -32,5 +32,6 @@
 #            Proxy Switchy Sharp组件 -> Import/Export -> Restore from File -> 
 #            选择local文件夹下的SwitchyOptions.bak
 
+sudo echo ''
 cd ~/project/teddy/goagent/goagent-goagent-45314ff/'local'
 sudo python proxy.py 1> /dev/null 2> /dev/null &
