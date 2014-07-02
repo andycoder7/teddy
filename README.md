@@ -11,7 +11,8 @@ Teddy
 > 由于只是个人使用，所以很多检查什么的都没有做，sorry...
 
 ###USEAGE
-> `sudo cp * /usr/bin/`
+> choose the shell you need
+> `sudo cp THE_ORDER_YOU_CHOOSE /usr/bin/`
 
 ###EXAMPLE
 > `sudo cp baidu /usr/bin/`<br>

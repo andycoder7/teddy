@@ -1,0 +1,13 @@
+#!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      bing 
+# Usage:     just a copy of baidu
+# Example:   baidu haha woshiyigedashabi
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Jul 2 2014
+# Base:      browser(1.0)
+
+
+data="$@"
+browser www.bing.com/search?q="${data}" 1> /dev/null 2> /dev/null &
