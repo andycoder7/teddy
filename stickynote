@@ -1,4 +1,16 @@
 #!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      stickynote
+# Usage:     I always use windows and linux both in one computer, because windows
+#			 is good at documents writing and gaming. And I used to use sticky notes
+#            which supported by Win7 to record something I am going to do. And I 
+#            want to know what I record in the windows when I was playing with Linux.
+# Example:   stickynote 
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Jul 2 2014
+# Notes;     The order is only suitable for my computer because the file called
+#            sticynotes.snt is stored in different place in different PCs.
 
 sudo umount /mnt &>/dev/null
 sudo umount /dev/sda2 &>/dev/null
