@@ -1,0 +1,21 @@
+#!/bin/bash
+# -*- coding:utf-8 -*-
+# Name:      browser 
+# Usage:     auto-get a browser you have installed(not the default one)
+# Example:   browser 
+# Author:    andy (andy.at.working@gmail.com)
+# Version:   1.0
+# Date:      Jul 2 2014
+
+browsers="/usr/bin/firefox /usr/bin/chromium-browser"
+for b in $browsers
+do
+	echo $b
+	if [ -f $b ]
+	then
+		$b $@
+	else
+		continue
+	fi
+done
+

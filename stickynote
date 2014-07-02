@@ -9,6 +9,7 @@
 # Author:    andy (andy.at.working@gmail.com)
 # Version:   1.0
 # Date:      Jul 2 2014
+# Base:      soffice(libreofficei v4.2.3.3 420m0 Build:3) 7z(v9.20)
 # Notes;     The order is only suitable for my computer because the file called
 #            sticynotes.snt is stored in different place in different PCs.
 
