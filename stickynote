@@ -1,0 +1,27 @@
+#!/bin/bash
+
+sudo umount /mnt &>/dev/null
+sudo umount /dev/sda2 &>/dev/null
+sudo mount /dev/sda2 /mnt	&>/dev/null
+cp /mnt/Users/Andy/AppData/Roaming/Microsoft/Sticky\ Notes/StickyNotes.snt ./.snt
+sudo umount /dev/sda2 &>/dev/null
+#sed -e  "$(TEMP).*/a\asdfsdf asdf /" snt
+#
+#if [ $# -ne 0 ]  
+#then  
+#	echo "hello world"
+#	soffice --headless --convert-to xml 0
+#	LAST_WORDS=`grep -E "<Text" 0.xml |awk -F "<Text " '{print $1}'|sed -e '/^ *$/d'|awk 'END{print $0}' `
+#	rm 0.xml
+#	echo $LAST_WORDS
+#	sed 's/^$LAST_WORDS.*/&asd/' snt
+#	exit
+#fi 
+7z -os e .snt &>/dev/null
+rm -f .snt
+cd s
+soffice --headless --convert-to xml 0 &>/dev/null
+grep -E "<Text" 0.xml |awk -F "<Text " '{print $1}'|sed -e '/^ *$/d'|awk '{print NR ": " $0 "\n"}' 
+rm 0.xml
+cd ..
+rm -rf s
