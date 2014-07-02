@@ -14,23 +14,26 @@
 sudo apt-get update 
 sudo apt-get upgrade 
 # for my terminal
-sudo apt-get install terminator
+sudo apt-get -y install terminator
 # for chrome
-sudo apt-get install chromium-browser
+sudo apt-get -y install chromium-browser
 # for dict
-sudo apt-get install sdcv
+sudo apt-get -y install sdcv
+sudo ln /usr/bin/sdcv /usr/bin/dict
 # for using vi
-sudo apt-get install vim
+sudo apt-get -y install vim
 # for coding C
-sudo apt-get install ctags
+sudo apt-get -y install ctags
 # for markdown to html
-sudo apt-get install pandoc
+sudo apt-get -y install pandoc
 # for github
-sudo apt-get install git
+sudo apt-get -y install git
 # for goagent
-sudo apt-get install python-dev python-greenlet python-gevent python-vte python-openssl python-crypto python-appindicator
-sudo apt-get install python-dev python-pip && sudo pip install gevent --upgrade
+sudo apt-get -y install python-dev python-greenlet python-gevent python-vte python-openssl python-crypto python-appindicator
+sudo apt-get -y install python-dev python-pip && sudo pip install gevent --upgrade
 # for wiznote
 sudo  add-apt-repository ppa:wiznote-team
 sudo apt-get update
-sudo apt-get install wiznote
+sudo apt-get -y install wiznote
+# for gimp
+sudo apt-get -y install gimp
