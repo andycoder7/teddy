@@ -1,11 +1,14 @@
 #!/bin/bash
 # -*- coding:utf-8 -*-
 # Name:      douban
-# Usage:     个人比较喜欢douban.fm，但每次都要开机都要开chrome输入豆瓣
+# Usage:     v1.0 个人比较喜欢douban.fm，但每次都要开机都要开chrome输入豆瓣
 #            网址什么的太烦了，直接写了一个脚本放在/usr/bin/下了
+#            v1.1 update the order by 'browser' which can choose another
+#            browser if my os doesn't have chrome or firefox
 # Example:   douban
 # Author:    andy (andy.at.working@gmail.com)
-# Version:   1.0
-# Date:      Apr 8 2014
+# Version:   1.1
+# Date:      Jul 2 2014
+# Base:      browser(1.0)
 
-chromium-browser douban.fm 1> /dev/null 2> /dev/null &
+browser douban.fm 1> /dev/null 2> /dev/null &
