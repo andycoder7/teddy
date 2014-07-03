@@ -5,36 +5,106 @@
 #			 is good at documents writing and gaming. And I used to use sticky notes
 #            which supported by Win7 to record something I am going to do. And I 
 #            want to know what I record in the windows when I was playing with Linux.
+#            v1.1 I try to add function about add notes but it seems that I should 
+#            learn more about the stickynote instead of realizing it's just as a file.
 # Example:   stickynote 
 # Author:    andy (andy.at.working@gmail.com)
-# Version:   1.0
-# Date:      Jul 2 2014
+# Version:   1.1
+# Date:      Jul 3 2014
 # Base:      soffice(libreofficei v4.2.3.3 420m0 Build:3) 7z(v9.20)
 # Notes;     The order is only suitable for my computer because the file called
 #            sticynotes.snt is stored in different place in different PCs.
 
-sudo umount /mnt &>/dev/null
-sudo umount /dev/sda2 &>/dev/null
-sudo mount /dev/sda2 /mnt	&>/dev/null
-cp /mnt/Users/Andy/AppData/Roaming/Microsoft/Sticky\ Notes/StickyNotes.snt ./.snt
-sudo umount /dev/sda2 &>/dev/null
-#sed -e  "$(TEMP).*/a\asdfsdf asdf /" snt
-#
-#if [ $# -ne 0 ]  
-#then  
-#	echo "hello world"
-#	soffice --headless --convert-to xml 0
-#	LAST_WORDS=`grep -E "<Text" 0.xml |awk -F "<Text " '{print $1}'|sed -e '/^ *$/d'|awk 'END{print $0}' `
-#	rm 0.xml
-#	echo $LAST_WORDS
-#	sed 's/^$LAST_WORDS.*/&asd/' snt
-#	exit
-#fi 
-7z -os e .snt &>/dev/null
-rm -f .snt
-cd s
-soffice --headless --convert-to xml 0 &>/dev/null
-grep -E "<Text" 0.xml |awk -F "<Text " '{print $1}'|sed -e '/^ *$/d'|awk '{print NR ": " $0 "\n"}' 
-rm 0.xml
-cd ..
-rm -rf s
+SYS_DISK='/dev/sda2'
+MOUNT_PATH='/mnt'
+NOTE_PATH='Users/Andy/AppData/Roaming/Microsoft/Sticky Notes'
+
+function help()
+{
+#	echo "stickynote [-a <message-added>] [-d <deleting-message-number>] [-h]"
+#	echo -e  "Tips: If there is space in the sentence. you should use \c"
+#	echo "quoting to quote the whole words"
+	exit
+}
+
+function check()
+{
+	if [ -z "$*" ]
+	then
+		exit
+	fi
+}
+
+function get_note()
+{
+	sudo umount $MOUNT_PATH &>/dev/null
+	sudo umount $SYS_DISK &>/dev/null
+	sudo mount $SYS_DISK $MOUNT_PATH	&>/dev/null
+	cp "$MOUNT_PATH/$NOTE_PATH/StickyNotes.snt" _snt
+	7z -o_s e _snt &>/dev/null
+	cd _s
+	soffice --headless --convert-to xml 0 &>/dev/null
+	grep -E "<Text" 0.xml |awk -F "<Text " '{print $1}'|sed -e '/^ *$/d'|awk '{print NR ": " $0 "\n"}' > _stickynote
+	cd ..
+}
+function show_note()
+{
+	cat _s/_stickynote 2>/dev/null
+}
+
+function delete_msg()
+{
+	
+	exit
+}
+
+function add_msg()
+{
+	sudo umount $MOUNT_PATH &>/dev/null
+	sudo umount $SYS_DISK &>/dev/null
+	sudo mount $SYS_DISK $MOUNT_PATH	&>/dev/null
+	cp "$MOUNT_PATH/$NOTE_PATH/StickyNotes.snt" _snt
+	7z -o_s e _snt &>/dev/null
+	cd _s
+	soffice --headless --convert-to xml 0 &>/dev/null
+	cd ..
+	LAST_WORDS=`grep -E "<Text" _s/0.xml |awk -F "<Text " '{print $1}'|sed -e '/^ *$/d'|awk 'END{print $0}' `
+	sed -e "/^`echo $LAST_WORDS`.*/a\\``\\\\par" "$MOUNT_PATH/$NOTE_PATH/StickyNotes.snt"  -e  "/^`echo $LAST_WORDS`.*/a\\`echo $@`\\\\par" "$MOUNT_PATH/$NOTE_PATH/StickyNotes.snt" -e "/^`echo $LAST_WORDS`.*/a\\``\\\\par" "$MOUNT_PATH/$NOTE_PATH/StickyNotes.snt"
+	
+	
+}
+
+function clean()
+{
+	rm -f _snt
+	rm -rf _s
+	sudo umount $SYS_DISK &>/dev/null
+	exit
+}
+
+while getopts "a:d:h" arg
+do
+	case $arg in
+		a)
+			break
+			MSG=$OPTARG
+			check $MSG
+			add_msg $MSG
+			clean
+			;;
+		d)
+			break
+			MSG=$OPTARG
+			check $MSG
+			delete_msg $MSG
+			clean
+			;;
+		h)
+			help
+			;;
+	esac
+done
+
+get_note
+show_note
+clean
