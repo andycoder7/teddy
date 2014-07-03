@@ -9,5 +9,5 @@
 # Base:      browser(1.0)
 
 
-data="$@"
-browser www.bing.com/search?q="${data}" 1> /dev/null 2> /dev/null &
+data="$*"
+browser www.bing.com/search?q=${data} 1> /dev/null 2> /dev/null &

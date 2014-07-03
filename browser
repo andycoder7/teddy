@@ -13,7 +13,7 @@ do
 	echo $b
 	if [ -f $b ]
 	then
-		$b $@
+		$b "$*"
 	else
 		continue
 	fi
