@@ -1,0 +1,48 @@
+#!/bin/bash
+:<<BLOCK
+ -*- coding:utf-8 -*-
+ Name:      coc_online
+ Usage:		I am playing a game called "Clash of clans", and I always feel sadness
+			when I was attacked. So I just write the sh for my money and black-oil
+ Example:   coc_online [-e]
+ Author:    andy (andy.at.working@gmail.com)
+ Version:   1.0
+ Date:      Jul 4 2014
+ Base:      adb
+ Notes;     The order is only suitable for my computer because of the path about SDK
+BLOCK
+
+function online()
+{
+	SDK_PATH="/home/andy/project/teddy/coc_online/SDK/android-sdk-linux"
+	export PATH=$PATH:$SDK_PATH/platform-tools
+
+	while(true)
+	do
+		adb shell input tap 250 250
+		sleep 2
+	done
+}
+function help()
+{
+	echo "coc_online [-e] [-h]"
+	echo "-e: exit the coc_online mode"
+	echo "-h: here is the message"
+	echo "no args: begin always-online mode"
+}
+
+while getopts "eh" arg
+do
+	case $arg in
+		e)
+			sudo ps aux |grep coc_online |grep -v "grep"|awk '{print $2}'|xargs kill
+			exit
+			;;
+		h)
+			help
+			exit
+			;;
+	esac
+done
+
+online & &>/dev/null
